@@ -13,9 +13,9 @@ This application predicts predicts whether a customer will purchase the newly in
 Please enter the data below to get a prediction.
 """)
 
-AgeGroup = st.selectbox("Age Group", ["18-25","26-41","42-57","58-76+"])
+AgeGroup = st.selectbox("Age Group", ["18-25 Years","26-41 Years","42-57 Years","58-76+ Years"])
 TypeofContact = st.selectbox("Type of Contact", ["Self Enquiry","Company Invited"])
-CityTier = st.selectbox("City Tier", [1,2,3])
+CityTier = st.selectbox("City Tier", [1,2,3],format_func=lambda x: f"Tier {x}")
 DurationOfPitch = st.number_input("Duration Of Pitch", 1, 150, 15, 1)
 Occupation = st.selectbox("Occupation", ["Salaried","Small Business","Large Business","Free Lancer"])
 Gender = st.selectbox("Gender", ["Male", "Female"])
@@ -57,6 +57,6 @@ input_data = pd.DataFrame([{
 
 if st.button("Predict"):
     prediction = model.predict(input_data)[0]
-    result = "Yes - Customer is likely to purchase" if prediction == 1 else "No - The customer less likely to purchase"
+    result = "Yes - Customer is likely to purchase" if prediction == 1 else "No - The customer is less likely to purchase"
     st.subheader("Prediction Result:")
     st.success(f"The model predicts: **{result}**")
